@@ -33,5 +33,26 @@ python app.py
 # GET /store/<string:name>/item
 ```
 
-## Chamando a API com JS
+## Chamando a API com Postman
 
+
+```
+POST
+http://localhost:5000/store
+Content-Type:application/json
+
+{
+    "name": "Another Store"
+}
+```
+
+```
+POST
+http://localhost:5000/store/My Wonderful Store/item
+Content-Type:application/json
+
+{
+    "name": "Another item",
+    "price": 10.99
+}
+```
