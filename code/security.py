@@ -1,33 +1,18 @@
+from werkzeug.security import safe_str_cmp
 from user import User
 
 users = [
-    {
-        'id': 1,
-        'username': 'admin',
-        'password': '1234'
-    }
+    User(1, 'admin', '1234')
 ]
 
-username_mapping = {
-    'admin': {
-        'id': 1,
-        'username': 'admin',
-        'password': '1234'
-    }
-}
+username_mapping = {user.username: user for user in users}
 
-userid_mapping = {
-    1: {
-        'id': 1,
-        'username': 'admin',
-        'password': '1234'
-    }
-}
+userid_mapping = {user.id: user for user in users}
 
 
 def authenticate(username, password):
     user = username_mapping.get(username, None)
-    if user and user.password == password:
+    if user and safe_str_cmp(user.password, password):
         return user
 
 
