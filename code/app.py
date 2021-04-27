@@ -1,8 +1,9 @@
 from flask import Flask, request
 from flask_restful import Resource, Api
-
+from decouple import config
 
 app = Flask(__name__)
+app.secret_key = config('SECRET_KEY')
 api = Api(app)
 
 
