@@ -32,3 +32,6 @@ python app.py
 # POST /store/<string:name>/item {name:, price:}
 # GET /store/<string:name>/item
 ```
+
+## Chamando a API com JS
+

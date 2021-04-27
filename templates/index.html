@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <title>Flask</title>
+
+  <script type="text/javascript">
+    function httpGetAsync(theUrl, callback) {
+      var xmlHttp = new XMLHttpRequest();
+      xmlHttp.onreadystatechange = function() {
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+          callback(xmlHttp.responseText);
+      }
+      xmlHttp.open("GET", theUrl, true); // true for async
+      xmlHttp.send(null);
+    }
+
+    httpGetAsync('http://127.0.0.1:5000/store', function(response) {
+      alert(response)
+    });
+  </script>
+
+</head>
+<body>
+
+<div id="myElement">
+  Hello
+</div>
+
+</body>
+</html>
