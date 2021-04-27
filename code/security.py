@@ -1,5 +1,5 @@
-from werkzeug.security import safe_str_cmp
 from user import User
+from werkzeug.security import safe_str_cmp
 
 users = [
     User(1, 'admin', '1234')
