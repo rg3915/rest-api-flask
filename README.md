@@ -56,3 +56,13 @@ Content-Type:application/json
     "price": 10.99
 }
 ```
+
+```
+POST
+http://localhost:5000/item/<name>
+Content-Type:application/json
+
+{
+    "price": 12.99
+}
+```
