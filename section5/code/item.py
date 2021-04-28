@@ -108,5 +108,18 @@ class Item(Resource):
 
 
 class ItemList(Resource):
+
     def get(self):
+        connection = sqlite3.connect('db.sqlite3')
+        cursor = connection.cursor()
+
+        query = "SELECT * FROM items"
+        result = cursor.execute(query)
+
+        items = []
+        for row in result:
+            items.append({'name': row[1], 'price': row[2]})
+
+        connection.close()
+
         return {'items': items}
