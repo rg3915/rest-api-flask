@@ -3,6 +3,7 @@ from flask import Flask, request
 from flask_jwt import JWT, jwt_required
 from flask_restful import Api, Resource, reqparse
 from security import authenticate, identity
+from user import UserRegister
 
 app = Flask(__name__)
 app.secret_key = config('SECRET_KEY')
@@ -67,6 +68,7 @@ class ItemList(Resource):
 
 api.add_resource(Item, '/item/<string:name>')
 api.add_resource(ItemList, '/items')
+api.add_resource(UserRegister, '/register')
 
 
 app.run(port=5000, debug=True)

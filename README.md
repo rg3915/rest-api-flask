@@ -80,3 +80,11 @@ python test.py
 ```
 python section5/code/app.py
 ```
+
+## Section 5
+
+```
+cd section5/code
+python create_tables.py
+python app.py
+```
