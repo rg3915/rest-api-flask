@@ -44,6 +44,15 @@ class Item(Resource):
             'price': data['price']
         }
 
+        try:
+            self.insert(item)
+        except Exception as e:
+            return {"message": f"An error occurred inserting the item. {e}"}, 500
+
+        return item, 201
+
+    @classmethod
+    def insert(cls, item):
         connection = sqlite3.connect('db.sqlite3')
         cursor = connection.cursor()
 
@@ -52,8 +61,6 @@ class Item(Resource):
 
         connection.commit()
         connection.close()
-
-        return item, 201
 
     def put(self, name):
         data = Item.parser.parse_args()
