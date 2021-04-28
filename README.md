@@ -67,3 +67,16 @@ Content-Type:application/json
     "price": 12.99
 }
 ```
+
+
+## Usando sqlite
+
+```
+python test.py
+```
+
+## Rodando a aplicação novamente
+
+```
+python section5/code/app.py
+```
