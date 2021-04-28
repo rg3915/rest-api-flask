@@ -9,7 +9,7 @@ class User:
         self.password = password
 
     @classmethod
-    def find_by_username(cls, username):
+    def find_by_username(cls, username):  # here
         connection = sqlite3.connect('db.sqlite3')
         cursor = connection.cursor()
 
@@ -25,7 +25,7 @@ class User:
         return user
 
     @classmethod
-    def find_by_id(cls, _id):
+    def find_by_id(cls, _id):  # here
         connection = sqlite3.connect('db.sqlite3')
         cursor = connection.cursor()
 
