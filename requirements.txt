@@ -3,3 +3,4 @@ Flask-RESTful==0.3.8
 Flask-JWT==0.3.2
 python-decouple==3.4
 isort==5.8.0
+Flask-SQLAlchemy==2.5.1
