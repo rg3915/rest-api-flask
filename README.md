@@ -141,3 +141,10 @@ pm.test("Response time is less than 200ms", function () {
     pm.expect(pm.response.responseTime).to.be.below(200);
 });
 ```
+
+## Links
+
+https://github.com/tecladocode/rest-api-sections
+
+https://github.com/schoolofcode-me/stores-rest-api  # deploy on Heroku
+
