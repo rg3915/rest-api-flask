@@ -18,7 +18,7 @@ class Item(Resource):
     def get(self, name):
         item = ItemModel.find_by_name(name)
         if item:
-            return item
+            return item.json()
         return {'message': 'Item not found'}, 404
 
     def post(self, name):
@@ -27,13 +27,10 @@ class Item(Resource):
 
         data = Item.parser.parse_args()
 
-        item = {
-            'name': name,
-            'price': data['price']
-        }
+        item = ItemModel(name, data['price'])
 
         try:
-            ItemModel.insert(item)
+            item.insert()
         except Exception as e:
             return {"message": f"An error occurred inserting the item. {e}"}, 500
 
@@ -43,22 +40,19 @@ class Item(Resource):
         data = Item.parser.parse_args()
 
         item = ItemModel.find_by_name(name)
-        updated_item = {
-            'name': name,
-            'price': data['price']
-        }
+        updated_item = ItemModel(name, data['price'])
 
         if item is None:
             try:
-                ItemModel.insert(updated_item)
+                updated_item.insert()
             except Exception as e:
                 return {"message": f"An error occurred inserting the item. {e}"}, 500
         else:
             try:
-                ItemModel.update(updated_item)
+                updated_item.update()
             except Exception as e:
                 return {"message": f"An error occurred updating the item. {e}"}, 500
-        return updated_item
+        return updated_item.json()
 
     def delete(self, name):
         connection = sqlite3.connect('db.sqlite3')
