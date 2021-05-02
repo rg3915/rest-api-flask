@@ -30,7 +30,7 @@ class Item(Resource):
         item = ItemModel(name, data['price'])
 
         try:
-            item.insert()
+            item.save_to_db()
         except Exception as e:
             return {"message": f"An error occurred inserting the item. {e}"}, 500
 
@@ -40,46 +40,24 @@ class Item(Resource):
         data = Item.parser.parse_args()
 
         item = ItemModel.find_by_name(name)
-        updated_item = ItemModel(name, data['price'])
 
-        if item is None:
-            try:
-                updated_item.insert()
-            except Exception as e:
-                return {"message": f"An error occurred inserting the item. {e}"}, 500
+        if item:
+            item.price = data['price']
         else:
-            try:
-                updated_item.update()
-            except Exception as e:
-                return {"message": f"An error occurred updating the item. {e}"}, 500
-        return updated_item.json()
+            item = ItemModel(name, **data)
+
+        item.save_to_db()
+
+        return item.json()
 
     def delete(self, name):
-        connection = sqlite3.connect('db.sqlite3')
-        cursor = connection.cursor()
-
-        query = "DELETE FROM items WHERE name=?"
-        cursor.execute(query, (name,))
-
-        connection.commit()
-        connection.close()
-
-        return {'message': 'Item deleted'}
+        item = ItemModel.find_by_name(name)
+        if item:
+            item.delete_from_db()
+            return {'message': 'Item deleted.'}
+        return {'message': 'Item not found.'}, 404
 
 
 class ItemList(Resource):
-
     def get(self):
-        connection = sqlite3.connect('db.sqlite3')
-        cursor = connection.cursor()
-
-        query = "SELECT * FROM items"
-        result = cursor.execute(query)
-
-        items = []
-        for row in result:
-            items.append({'name': row[1], 'price': row[2]})
-
-        connection.close()
-
-        return {'items': items}
+        return {'items': list(map(lambda x: x.json(), ItemModel.query.all()))}
