@@ -21,7 +21,7 @@ class ItemModel:
         connection.close()
 
         if row:
-            return cls(*row)
+            return cls(row[1], row[2])
 
     def insert(self):
         connection = sqlite3.connect('db.sqlite3')

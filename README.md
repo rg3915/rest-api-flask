@@ -88,3 +88,12 @@ cd section5/code
 python create_tables.py
 python app.py
 ```
+
+## Section 6
+
+```
+cd section6/code
+python create_tables.py
+python app.py
+```
+

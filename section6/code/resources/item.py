@@ -34,7 +34,7 @@ class Item(Resource):
         except Exception as e:
             return {"message": f"An error occurred inserting the item. {e}"}, 500
 
-        return item, 201
+        return item.json(), 201
 
     def put(self, name):
         data = Item.parser.parse_args()
