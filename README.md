@@ -97,3 +97,47 @@ python create_tables.py
 python app.py
 ```
 
+### Advanced Postman
+
+Defina url como `{{url}}`.
+
+E em Manage environments defina
+
+```
+url: http://127.0.0.1:5000
+```
+
+E em `{{url}}/item/test` defina `JWT {{jwt_token}}`.
+
+Em `/auth` crie um `Tests`.
+
+```js
+var jsonData = JSON.parse(responseBody);
+tests["Your test name"] = jsonData.access_token !== undefined;
+
+pm.environment.set("jwt_token", jsonData.access_token);
+```
+
+Crie um test em `/items`
+
+```js
+pm.test("Status code is 200", function () {
+    pm.response.to.have.status(200);
+});
+
+pm.test("Response time is less than 200ms", function () {
+    pm.expect(pm.response.responseTime).to.be.below(200);
+});
+```
+
+Crie um test em `POST /items/<name>`
+
+```
+pm.test("Status code is 201", function () {
+    pm.response.to.have.status(201);
+});
+
+pm.test("Response time is less than 200ms", function () {
+    pm.expect(pm.response.responseTime).to.be.below(200);
+});
+```
